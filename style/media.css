@@ -1,0 +1,219 @@
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   1024  → hero & about stack to one column
+    900  → header nav becomes a slide-in drawer
+    760  → skills / projects / contact to one column
+    560  → tighten spacing, features to one column
+    380  → smallest phones
+   ============================================================ */
+
+/* ---------- 1024: stack hero + about ---------- */
+@media (max-width: 1024px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .hero__code {
+    max-width: 34rem;
+    width: 100%;
+  }
+  /* flatten the 3D tilt once it's full width */
+  .code-card {
+    transform: none;
+  }
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ---------- 900: mobile drawer nav ---------- */
+@media (max-width: 900px) {
+  .header {
+    backdrop-filter: blur(16px);
+  }
+
+  body.menu-open .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  /* the nav turns into a right-side drawer */
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    width: min(82vw, 20rem);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.6rem;
+    padding: calc(var(--header-h) + 1.5rem) 2rem 2rem;
+    background: var(--bg-elev);
+    border-left: 1px solid var(--line);
+    box-shadow: -30px 0 60px -30px rgba(0, 0, 0, 0.8);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 55;
+    overflow-y: auto;
+  }
+  .nav.open {
+    transform: translateX(0);
+  }
+
+  .nav__links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    width: 100%;
+  }
+  .nav__links li {
+    width: 100%;
+  }
+  .nav__links a {
+    display: block;
+    width: 100%;
+    font-size: 1.15rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__links a::after {
+    display: none;
+  }
+  .nav__links a:hover,
+  .nav__links a.active {
+    color: var(--accent);
+  }
+
+  .nav__cta {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 1.1rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* ---------- 760: single-column content ---------- */
+@media (max-width: 760px) {
+  .skills {
+    grid-template-columns: 1fr;
+  }
+  .projects {
+    grid-template-columns: 1fr;
+  }
+  .contact__card {
+    grid-template-columns: 1fr;
+  }
+  .contact__left {
+    text-align: left;
+    margin-bottom: 4rem;
+  }
+  .contact__right {
+    text-align: center;
+    align-items: center;
+  }
+  .contact__btn {
+    align-self: center;
+  }
+  .socials {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------- 560: phones ---------- */
+@media (max-width: 560px) {
+  .wrap {
+    padding: 0 1.15rem;
+  }
+  .header__inner {
+    padding: 0.85rem 1.15rem;
+  }
+  .features {
+    grid-template-columns: 1fr;
+  }
+  .hero__actions .btn {
+    flex: 1 1 auto;
+  }
+  .hero__stats {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .stat__num {
+    font-size: 1.5rem;
+  }
+  .project__body {
+    padding: 1.3rem;
+  }
+  .footer__inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .to-top {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
+
+/* ---------- 380: smallest phones ---------- */
+@media (max-width: 380px) {
+  .wrap {
+    padding: 0 0.95rem;
+  }
+  .hero__title {
+    font-size: 2.2rem;
+  }
+  .nav {
+    width: min(88vw, 18rem);
+    padding: calc(var(--header-h) + 1.2rem) 1.5rem 1.5rem;
+  }
+  .hero__stats {
+    gap: 0.75rem;
+  }
+  .stat__label {
+    font-size: 0.78rem;
+  }
+}
+
+/* ---------- Mobile: vertical-only reveals (prevents any sideways overflow) ---------- */
+@media (max-width: 900px) {
+  .reveal.from-left,
+  .reveal.from-right {
+    transform: translateY(40px);
+  }
+  .reveal.reveal--visible {
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .bar span {
+    transition: none;
+  }
+  .nav {
+    transition: none;
+  }
+}
