@@ -160,7 +160,10 @@ if (reduceMotion) {
     submitBtn.textContent = "Sending...";
 
     emailjs
-      .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+      .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form ,{
+          publicKey: EMAILJS_PUBLIC_KEY,
+          replyTo: form.user_email.value,
+      })
       .then(() => {
         status.textContent = "✓ Thanks! Your message has been sent.";
         status.classList.add("success");
