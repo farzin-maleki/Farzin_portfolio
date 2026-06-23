@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="FM logo">
+  <rect width="64" height="64" rx="14" fill="#0B2239"/>
+  <g fill="none" stroke="#2DD4BF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- F -->
+    <path d="M13 50 V14 H25"/>
+    <path d="M13 32 H23"/>
+    <!-- M -->
+    <path d="M33 50 V14 L42 32 L51 14 V50"/>
+  </g>
+</svg>
