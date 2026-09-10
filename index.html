@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Farzin Maleki | Frontend Developer</title>
-    <meta name="google-site-verification" content="zQOK83zD4yoh2Dw0eVxvT2x0nisFws9bdsZeibV60vw" />
+    <meta
+      name="google-site-verification"
+      content="zQOK83zD4yoh2Dw0eVxvT2x0nisFws9bdsZeibV60vw"
+    />
     <meta
       name="description"
       content="Farzin Maleki — UK-based frontend developer hand-coding fast, responsive websites with HTML, CSS and JavaScript. Real client work, shipped."
@@ -19,7 +22,7 @@
     <link rel="stylesheet" href="./style/style.css" />
     <link rel="stylesheet" href="./style/media.css" />
   </head>
-  <body>
+  <body onload="renderProjects()">
     <!-- HEADER -->
     <header class="header" id="top">
       <div class="header__inner">
@@ -89,7 +92,7 @@
             </div>
             <div class="hero__stats">
               <div class="stat">
-                <div class="stat__num">2</div>
+                <div class="stat__num"></div>
                 <div class="stat__label">Live client sites</div>
               </div>
               <div class="stat">
@@ -305,180 +308,7 @@
             </p>
           </div>
           <div class="projects">
-            <!-- Project 1 -->
-            <article class="project reveal from-left">
-              <div class="project__top">
-                <div class="browser-bar">
-                  <i></i><i></i><i></i>
-                  <span class="browser-url">https://farhad-nouri.com</span>
-                </div>
-              </div>
-              <div class="project__visual">
-                <img src="./images/farhad-nouri.png" />
-              </div>
-              <div class="project__body">
-                <span class="project__badge"
-                  >Client project · Live<span class="dot"></span
-                ></span>
-                <h3>Athlete &amp; Coaching Site</h3>
-                <p>
-                  A bilingual personal brand and fitness-coaching site for an
-                  athlete, with online booking and automated payments.
-                </p>
-                <ul class="project__features">
-                  <li>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m5 12 5 5L20 7" />
-                    </svg>
-                    Cal.com booking &amp; EmailJS contact form
-                  </li>
-                  <li>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m5 12 5 5L20 7" />
-                    </svg>
-                    Stripe payments via Make.com automation
-                  </li>
-                  <li>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m5 12 5 5L20 7" />
-                    </svg>
-                    Bilingual English / Persian content
-                  </li>
-                </ul>
-                <div class="tech">
-                  <span>JavaScript</span><span>React</span><span>Vite</span
-                  ><span>HTML</span><span>CSS</span><span>Stripe</span>
-                </div>
-                <div class="project__links">
-                  <a
-                    href="https://farhad-nouri.com"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Visit site
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M7 17 17 7M8 7h9v9" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Project 2 -->
-            <article class="project reveal from-right">
-              <div class="project__top">
-                <div class="browser-bar">
-                  <i></i><i></i><i></i>
-                  <span class="browser-url">https://primenestpro.uk</span>
-                </div>
-              </div>
-              <div class="project__visual">
-                <img src="./images/primeNestPro.png" />
-              </div>
-              <div class="project__body">
-                <span class="project__badge"
-                  >Client project · Live<span class="dot"></span
-                ></span>
-                <h3>Handyman Company Site</h3>
-                <p>
-                  A marketing and quote-request site for a London handyman
-                  company, with a custom admin panel and database backend.
-                </p>
-                <ul class="project__features">
-                  <li>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m5 12 5 5L20 7" />
-                    </svg>
-                    Supabase backend with custom admin panel
-                  </li>
-                  <li>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m5 12 5 5L20 7" />
-                    </svg>
-                    Quote requests &amp; EmailJS notifications
-                  </li>
-                  <li>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m5 12 5 5L20 7" />
-                    </svg>
-                    Fully responsive, deployed on Netlify
-                  </li>
-                </ul>
-                <div class="tech">
-                  <span>JavaScript</span><span>React</span><span>Vite</span
-                  ><span>HTML</span><span>CSS</span><span>Supabase</span
-                  ><span>EmailJS</span>
-                </div>
-                <div class="project__links">
-                  <a
-                    href="https://primenestpro.uk"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Visit site
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M7 17 17 7M8 7h9v9" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </article>
+            <!-- Data Load from JS -->
           </div>
         </div>
       </section>
@@ -581,7 +411,7 @@
 
               <form class="contact__form" id="contactForm" novalidate>
                 <div class="field">
-                  <label for="cf-name" style="position: relative;">Name*</label>
+                  <label for="cf-name" style="position: relative">Name*</label>
                   <input
                     type="text"
                     id="cf-name"
@@ -591,11 +421,21 @@
                   />
                 </div>
                 <div class="field">
-                    <label for="cf-email" style="position: relative;">Email*</label>
-                    <input type="email" id="cf-email" name="user_email" placeholder="you@example.com" required />
+                  <label for="cf-email" style="position: relative"
+                    >Email*</label
+                  >
+                  <input
+                    type="email"
+                    id="cf-email"
+                    name="user_email"
+                    placeholder="you@example.com"
+                    required
+                  />
                 </div>
                 <div class="field">
-                  <label for="cf-mobile" style="position: relative;">Mobile number (optional)</label>
+                  <label for="cf-mobile" style="position: relative"
+                    >Mobile number (optional)</label
+                  >
                   <input
                     type="tel"
                     id="cf-mobile"
@@ -616,7 +456,9 @@
                 </div>
 
                 <div class="field">
-                  <label for="cf-message" style="position: relative;">Message*</label>
+                  <label for="cf-message" style="position: relative"
+                    >Message*</label
+                  >
                   <textarea
                     id="cf-message"
                     name="message"

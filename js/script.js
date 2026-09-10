@@ -131,6 +131,128 @@ if (reduceMotion) {
   type();
 }
 
+// ---------- work articles ----------
+
+const projects = [
+  {
+    id: 1,
+    url: "https://farhad-nouri.com",
+    img: "farhad-nouri.png",
+    title: "Athlete & Coaching Site",
+    description: `A bilingual personal brand and fitness-coaching site for an athlete, with online booking and automated payments`,
+    features: [
+      "Cal.com booking & EmailJS contact form",
+      "Stripe payments via Make.com automation",
+      "Bilingual English / Persian content",
+    ],
+    techs: ["JavaScript", "React", "Vite", "HTML", "CSS", "Stripe"],
+  },
+  {
+    id: 2,
+    url: "https://primenestpro.uk",
+    img: "primeNestPro.png",
+    title: "Handyman Company Site",
+    description: `A marketing and quote-request site for a London handyman company, with a custom admin panel and database backend.`,
+    features: [
+      "Supabase backend with custom admin panel",
+      "Quote requests & EmailJS notifications",
+      "Fully responsive, deployed on Netlify",
+    ],
+    techs: [
+      "JavaScript",
+      "React",
+      "Vite",
+      "HTML",
+      "CSS",
+      "Supabase",
+      "EmailJS",
+    ],
+  },
+  {
+    id: 3,
+    url: "https://www.dubai-restaurant.uk",
+    img: "dubai-restaurant.webp",
+    title: "Restaurant Ordering & Menu Site",
+    description: `A marketing and menu site for Original Dubai Shawarma, with AI-generated food photography and a cleaned-up digital menu.`,
+    features: [
+      "Menu digitized from Loyverse POS export",
+      "AI-generated food photography",
+      "Deployed on Vercel with custom domain",
+    ],
+    techs: ["JavaScript", "HTML", "CSS", "EmailJS"],
+  },
+];
+
+const statNum = document.querySelector(".stat__num");
+
+const projectsContainer = document.querySelector(".projects");
+
+function renderProjects() {
+  statNum.innerHTML = projects.length;
+  projects.forEach((project) => {
+    projectsContainer.insertAdjacentHTML(
+      "beforeend",
+      `
+            <article class="project reveal from-left">
+                <div class="project__top">
+                  <div class="browser-bar">
+                    <i></i><i></i><i></i>
+                    <span class="browser-url">${project.url}</span>
+                  </div>
+                </div>
+                <div class="project__visual">
+                  <img src="./images/${project.img}" />
+                </div>
+                <div class="project__body">
+                  <span class="project__badge"
+                    >Client project · Live<span class="dot"></span
+                  ></span>
+                  <h3>${project.title}</h3>
+                  <p>
+                    ${project.description}
+                  </p>
+                  <ul class="project__features"></ul>
+                  <div class="tech"></div>
+                  <div class="project__links">
+                    <a href="${project.url}" target="_blank" rel="noopener">
+                      Visit site
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17 17 7M8 7h9v9" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+            </article>
+      `,
+    );
+
+    const currentArticle = projectsContainer.lastElementChild;
+
+    revealObserver.observe(currentArticle);
+
+    const featuresContainer =
+      currentArticle.querySelector(".project__features");
+    project.features.forEach((feature) => {
+      featuresContainer.insertAdjacentHTML(
+        "beforeend",
+        `
+          <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m5 12 5 5L20 7" />
+              </svg>
+              ${feature}
+            </li>
+        `,
+      );
+    });
+
+    const techsContainer = currentArticle.querySelector(".tech");
+    project.techs.forEach((tech) => {
+      techsContainer.insertAdjacentHTML("beforeend", `<span>${tech}</span>`);
+    });
+  });
+}
+
 // ---------- Contact form (EmailJS) ----------
 (function () {
   const EMAILJS_PUBLIC_KEY = "y-GUM83X5K7MbDnDA";
@@ -160,9 +282,9 @@ if (reduceMotion) {
     submitBtn.textContent = "Sending...";
 
     emailjs
-      .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form ,{
-          publicKey: EMAILJS_PUBLIC_KEY,
-          replyTo: form.user_email.value,
+      .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form, {
+        publicKey: EMAILJS_PUBLIC_KEY,
+        replyTo: form.user_email.value,
       })
       .then(() => {
         status.textContent = "✓ Thanks! Your message has been sent.";
