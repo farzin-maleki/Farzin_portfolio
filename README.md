@@ -2,13 +2,13 @@
 
 My personal developer portfolio, hand-coded with HTML, CSS & JavaScript.
 
-Five pages: Home, About, Skills, Work and Contact. Shared navigation uses relative paths, so the site works at a domain root or in a subdirectory.
+Five pages: Home, About, Skills, Work and Contact. Navigation uses clean URLs: `/`, `/about`, `/skills`, `/work` and `/contact` on the deployed domain.
 
 - Light and dark themes follow the system preference until changed. The theme button saves the choice in localStorage under `theme`.
 - Font Awesome 7.3.1 icons, scroll reveals, animated skill bars and hover interactions, with reduced-motion support.
 - EmailJS contact form, with a direct email alternative if the service is unavailable.
 
-Serve this directory with any static HTTP server to preview the site. No build step or package installation is needed. Fonts, Font Awesome and EmailJS load from their existing external services.
+To preview navigation locally, use a static HTTP server that resolves extensionless paths to `.html` files, or a Vercel preview deployment. A basic static server can still open the `.html` files directly, but may return 404 for clean navigation URLs. No build step is needed. Fonts, Font Awesome and EmailJS load from their existing external services.
 
 ## Vercel deployment
 
@@ -18,7 +18,7 @@ Keep the Vercel project's Root Directory at the repository root (leave it blank)
 
 ## Certificates
 
-The Skills page includes a Certificates section at `skills.html#certificates`. Edit the array at the top of `public/js/certificates.js` to add or update a certificate. No changes to `script.js` are needed.
+The Skills page includes a Certificates section at `/skills#certificates`. Edit the array at the top of `public/js/certificates.js` to add or update a certificate. No changes to `script.js` are needed.
 
 Store certificate files in `public/media/certificates/`. All paths in the array are relative to the HTML page. The Mayerfeld Practicum and AI Frontend Engineer entries use their published certificate images and link to the original Credsverse credentials. Issuer and issue dates were read from those credentials.
 
