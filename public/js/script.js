@@ -4,19 +4,34 @@ const nav = document.getElementById("nav");
 const backdrop = document.getElementById("navBackdrop");
 
 function openMenu() {
+  document.body.style.setProperty(
+    "--menu-header-height",
+    `${document.querySelector(".header").getBoundingClientRect().height}px`,
+  );
   nav.classList.add("open");
   backdrop.classList.add("show");
   document.body.classList.add("menu-open");
   burger.setAttribute("aria-expanded", "true");
   burger.setAttribute("aria-label", "Close menu");
+  document.querySelector("main").inert = true;
+  document.querySelector(".footer").inert = true;
+  document.getElementById("themeToggle").inert = true;
+  document.getElementById("toTop").inert = true;
+  nav.querySelector("a").focus();
 }
 
 function closeMenu() {
+  const wasOpen = nav.classList.contains("open");
   nav.classList.remove("open");
   backdrop.classList.remove("show");
   document.body.classList.remove("menu-open");
   burger.setAttribute("aria-expanded", "false");
   burger.setAttribute("aria-label", "Open menu");
+  document.querySelector("main").inert = false;
+  document.querySelector(".footer").inert = false;
+  document.getElementById("themeToggle").inert = false;
+  document.getElementById("toTop").inert = false;
+  if (wasOpen) burger.focus();
 }
 
 function toggleMenu() {
@@ -29,6 +44,16 @@ backdrop.addEventListener("click", closeMenu);
 // Close on Escape
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeMenu();
+  if (e.key === "Tab" && nav.classList.contains("open")) {
+    const first = nav.querySelector("a");
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      burger.focus();
+    } else if (!e.shiftKey && document.activeElement === burger) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 });
 
 // Reset the drawer if the viewport grows back to desktop
@@ -39,11 +64,16 @@ window.addEventListener("resize", () => {
 // ---------- Smooth scroll for in-page links ----------
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener("click", (e) => {
-    const target = document.querySelector(link.getAttribute("href"));
+    const target = document.getElementById(link.hash.slice(1));
     if (target) {
       e.preventDefault();
       closeMenu();
-      target.scrollIntoView({ behavior: "smooth" });
+      target.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "instant"
+          : "smooth",
+      });
+      target.focus({ preventScroll: true });
     }
   });
 });
@@ -60,39 +90,38 @@ window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
 toTop.addEventListener("click", () =>
-  window.scrollTo({ top: 0, behavior: "smooth" }),
+  window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "instant"
+      : "smooth",
+  }),
 );
 
-// ---------- Bidirectional reveal (animates on scroll-down AND scroll-up) ----------
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      entry.target.classList.toggle("reveal--visible", entry.isIntersecting);
-    });
-  },
-  { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
-);
+// ---------- Reveal once on entry; keep content readable afterwards ----------
+const revealObserver =
+  "IntersectionObserver" in window
+    ? new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("reveal--visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.05, rootMargin: "0px 0px -40px 0px" },
+      )
+    : {
+        observe: (el) => el.classList.add("reveal--visible"),
+        unobserve: () => {},
+      };
+document.documentElement.classList.add("reveal-ready");
 document
   .querySelectorAll(".reveal")
   .forEach((el) => revealObserver.observe(el));
 
-// ---------- Active nav link highlighting ----------
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav__links a");
-const navObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute("id");
-        navLinks.forEach((a) =>
-          a.classList.toggle("active", a.getAttribute("href") === "#" + id),
-        );
-      }
-    });
-  },
-  { threshold: 0.5 },
-);
-sections.forEach((s) => navObserver.observe(s));
+// Active page links are marked in each HTML page.
 
 // ---------- Typed rotating role ----------
 const roles = [
@@ -106,9 +135,9 @@ const reduceMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
 
-if (reduceMotion) {
+if (typed && reduceMotion) {
   typed.textContent = roles[0];
-} else {
+} else if (typed) {
   let r = 0,
     c = 0,
     deleting = false;
@@ -137,7 +166,7 @@ const projects = [
   {
     id: 1,
     url: "https://farhad-nouri.com",
-    img: "farhad-nouri.png",
+    img: "farhad-nouri.webp",
     title: "Athlete & Coaching Site",
     description: `A bilingual personal brand and fitness-coaching site for an athlete, with online booking and automated payments`,
     features: [
@@ -150,7 +179,7 @@ const projects = [
   {
     id: 2,
     url: "https://primenestpro.uk",
-    img: "primeNestPro.png",
+    img: "primeNestPro.webp",
     title: "Handyman Company Site",
     description: `A marketing and quote-request site for a London handyman company, with a custom admin panel and database backend.`,
     features: [
@@ -181,6 +210,20 @@ const projects = [
     ],
     techs: ["JavaScript", "HTML", "CSS", "EmailJS"],
   },
+  {
+    id: 4,
+    url: "https://www.securitycaspianshield.com",
+    img: "securityCaspian.webp",
+    title: "Security Caspian Shield Website",
+    description: `A responsive, multi-page website for Security Caspian Shield Ltd, showcasing security services with tailored quote enquiries and direct contact options.`,
+    features: [
+      "Dedicated pages for five security services",
+      "Quote form with email and WhatsApp handoff",
+      "Responsive layouts and animated page transitions",
+      "Deployed on Vercel with a custom domain",
+    ],
+    techs: ["JavaScript", "HTML", "CSS", "Font Awesome"],
+  },
 ];
 
 const statNum = document.querySelector(".stat__num");
@@ -201,7 +244,7 @@ function renderProjects() {
                   </div>
                 </div>
                 <div class="project__visual">
-                  <img src="./images/${project.img}" />
+                  <img src="./public/media/images/projects/${project.img}" />
                 </div>
                 <div class="project__body">
                   <span class="project__badge"
@@ -260,7 +303,15 @@ function renderProjects() {
   const EMAILJS_TEMPLATE_ID = "template_lfpanuw";
 
   const form = document.getElementById("contactForm");
-  if (!form || typeof emailjs === "undefined") return;
+  if (!form) return;
+  if (typeof emailjs === "undefined") {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.getElementById("formStatus").textContent =
+        "The message service is unavailable. Please email malekifarzin36@gmail.com directly.";
+    });
+    return;
+  }
 
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
