@@ -10,6 +10,10 @@ Five pages: Home, About, Skills, Work and Contact. Shared navigation uses relati
 
 Serve this directory with any static HTTP server to preview the site. No build step or package installation is needed. Fonts, Font Awesome and EmailJS load from their existing external services.
 
+## Vercel deployment
+
+Keep the Vercel project's Root Directory at the repository root (leave it blank). `vercel.json` selects the Other framework preset, skips the build step, and sets the Output Directory to `.` so the five HTML pages and their `public/` assets are published together. Without this override, Vercel defaults to publishing only `public/`, which contains no homepage and causes a 404. Commit and push configuration changes to trigger a new deployment.
+
 `public/js/theme.js` applies the theme before first paint. `public/js/pages.js` connects the existing project renderer to the Work page and updates the home-page count. The **work articles** section of `public/js/script.js` is preserved unchanged.
 
 ## Certificates
